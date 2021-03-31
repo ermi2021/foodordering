@@ -11,7 +11,7 @@
        public $fasting;
        public $price;
   
-        public $Myids;
+        
 
        //constructor
        public function __construct($db) {
@@ -33,12 +33,12 @@
 
         public function readMultiple() {
             //create query
-            $query = 'SELECT title,price FROM '.$this->table.' WHERE id IN('.$this->Myids.')';
+            $query = 'SELECT title,price FROM '.$this->table.' WHERE id IN('.$this->id.')';
             // prepare statement
             $stmt = $this->conn->prepare($query);
            
             
-          $stmt->bindParam(1, $this->Myids);
+          $stmt->bindParam(1, $this->id);
          
             // Execute query
            
