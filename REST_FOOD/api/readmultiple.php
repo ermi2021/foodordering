@@ -16,7 +16,7 @@
   $recipe = new Recipe($db);
   
    //Get ID
-   $recipe->Myids = isset($_GET['ids']) ? $_GET['ids'] : die("feaild");
+   $recipe->id = isset($_GET['ids']) ? $_GET['ids'] : die("feaild");
 
    
   $result = $recipe -> readMultiple();
