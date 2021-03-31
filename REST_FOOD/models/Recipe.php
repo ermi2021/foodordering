@@ -34,17 +34,18 @@
         public function readMultiple() {
             //create query
             $query = 'SELECT title,price FROM '.$this->table.' WHERE id IN('.$this->id.')';
+            
             // prepare statement
             $stmt = $this->conn->prepare($query);
-           
             
-          $stmt->bindParam(1, $this->id);
-         
-            // Execute query
            
+          
+
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            //execute query
             $stmt->execute();
+            
             //set properties
             $this->title = $row['title'];
             $this->price = $row['price'];
