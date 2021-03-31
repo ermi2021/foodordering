@@ -10,7 +10,8 @@
        public $category_id;
        public $fasting;
        public $price;
-
+  
+        public $Myids;
 
        //constructor
        public function __construct($db) {
@@ -23,11 +24,33 @@
            $query = 'SELECT * FROM '.$this->table.'';
            // prepare statement
            $stmt = $this->conn->prepare($query);
+
            // Execute query
            $stmt->execute();
 
            return $stmt;
         }
+
+        public function readMultiple() {
+            //create query
+            $query = 'SELECT title,price FROM '.$this->table.' WHERE id IN('.$this->Myids.')';
+            // prepare statement
+            $stmt = $this->conn->prepare($query);
+           
+            
+          $stmt->bindParam(1, $this->Myids);
+         
+            // Execute query
+           
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $stmt->execute();
+            //set properties
+            $this->title = $row['title'];
+            $this->price = $row['price'];
+         
+            return $stmt;
+         }
        public function read_single() {
         //create query
         $query = 'SELECT *  FROM
@@ -44,8 +67,7 @@
 
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
    
-        //set properties
-       
+        //set properties 
         $this->title = $row['title'];
         $this->photo_url = $row['photo_url'];
         $this->time = $row['time'];
@@ -53,6 +75,8 @@
         $this->category_id = $row['category_id'];
         $this->fasting = $row['fasting'];
         $this->price = $row['price'];
+
+        return $stmt;
        }
 
        public function read_category() {
