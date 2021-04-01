@@ -1,25 +1,25 @@
 <?php 
    class Recipe {
-       private $conn;
-       private $table = 'recipe';
-       public $id;
-       public $title;
-       public $photo_url;
-       public $time;
-       public $description;
-       public $category_id;
-       public $fasting;
-       public $price;
-  
+        private $conn;
+        private $table = 'recipe';
+        public $id;
+        public $title;
+        public $photo_url;
+        public $time;
+        public $description;
+        public $category_id;
+        public $fasting;
+        public $price;
+    
         
 
-       //constructor
-       public function __construct($db) {
-         $this->conn = $db; 
-       }
+        //constructor
+        public function __construct($db) {
+            $this->conn = $db; 
+        }
 
-       //Get Recipe
-       public function read() {
+        //Get Recipe
+        public function read() {
            //create query
            $query = 'SELECT * FROM '.$this->table.'';
            // prepare statement
@@ -33,26 +33,26 @@
 
         public function readMultiple() {
             //create query
-            $query = 'SELECT title,price FROM '.$this->table.' WHERE id IN('.$this->id.')';
+            $query = 'SELECT id,title,price FROM '.$this->table.' WHERE id IN('.$this->id.')';
             
             // prepare statement
             $stmt = $this->conn->prepare($query);
             
-           
-          
-
+            //
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             //execute query
             $stmt->execute();
             
             //set properties
+            $this->id = $row['id'];
             $this->title = $row['title'];
             $this->price = $row['price'];
          
             return $stmt;
          }
-       public function read_single() {
+
+        public function read_single() {
         //create query
         $query = 'SELECT *  FROM
         '.$this->table.' WHERE id=?
