@@ -31,7 +31,7 @@
         extract($row);
 
         $recipe_array = array(
-          
+            'id'=>$id,
             'title' => $title,
             'price'=>$price,
        );
