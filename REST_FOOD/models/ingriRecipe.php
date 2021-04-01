@@ -11,7 +11,7 @@
        public $_name;
        public $photo_url;
        public $id;
-       public $price;
+       public  $price;
        
 
        //constructor
@@ -24,7 +24,7 @@
         //create query
        
         $query = 'SELECT recipe.title,recipe_ingrident.ingrident_id,
-        ingridents._name,ingridents.photo_url,recipe.price FROM '.$this->recipe.','.$this->recipe_ingrident.','.$this->ingridents. ' WHERE  recipe.id = recipe_ingrident.recipe_id AND recipe_ingrident.ingrident_id = ingridents.id And recipe_id IN(22,31)';
+        ingridents._name,ingridents.photo_url,recipe.price FROM '.$this->recipe.','.$this->recipe_ingrident.','.$this->ingridents. ' WHERE  recipe.id = recipe_ingrident.recipe_id AND recipe_ingrident.ingrident_id = ingridents.id And recipe_id IN('.$this->id.')';
  
 $stmt = $this->conn->prepare($query);
       
