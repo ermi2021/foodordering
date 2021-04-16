@@ -12,41 +12,40 @@
   $db =$database->connect();
 
   //instantiate db objects
-  
   $ingriRecipe = new ingriRecipe($db);
   
    //Get ID
    $ingriRecipe->id = isset($_GET['ids']) ? $_GET['ids'] : die("faild");
 
    
-  $result = $ingriRecipe -> read();
+    $result = $ingriRecipe -> read();
 
-  $num = $result -> rowCount();
+    $num = $result -> rowCount();
 
-  if($num > 0) {
-    $recipe_ingrident_arr = array();
-    $recipe_ingrident_arr['data'] = array();
+    if($num > 0) {
+      $recipe_ingrident_arr = array();
+    
 
-    while($row = $result->fetch(PDO::FETCH_ASSOC)) {
-        extract($row);
+      while($row = $result->fetch(PDO::FETCH_ASSOC)) {
+          extract($row);
 
-        $recipe_ingrident_item = array(
-            'title' => $title,
-            'ingrident_id'=>$ingrident_id,
-            'name' => $_name,
-            'photo_url' => $photo_url,
-            'price' => $price
-       );
+          $recipe_ingrident_item = array(
+              'title' => $title,
+              'ingrident_id'=>$ingrident_id,
+              'name' => $_name,
+              'photo_url' => $photo_url,
+              'price' => $price
+          );
 
 
-        //push to 'data'
-        array_push($recipe_ingrident_arr['data'],$recipe_ingrident_item);     
-    }
+          //push to 'data'
+          array_push($recipe_ingrident_arr,$recipe_ingrident_item);     
+      }
 
-    //Turn to JSON & output
-    echo json_encode($recipe_ingrident_arr);
+      //Turn to JSON & output
+      echo json_encode($recipe_ingrident_arr);
 
- }
+  }
  else {
         
    // No Order_ingrident
